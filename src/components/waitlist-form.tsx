@@ -70,7 +70,7 @@ export function WaitlistForm() {
     event.currentTarget.reset();
     setState({
       status: "success",
-      message: "You are on the early-access list. I’ll send MineMarker beta updates there.",
+      message: "You are on the early-access list. I'll send MineMarker beta updates there.",
     });
   }
 

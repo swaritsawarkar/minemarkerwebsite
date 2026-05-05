@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowDown,
   Clock,
@@ -11,13 +11,20 @@ import {
   Sparkles,
   TimerOff,
 } from "lucide-react";
+import dynamic from "next/dynamic";
 import { SiteNav } from "./site-nav";
-import { VoxelScene } from "./voxel-scene";
+
+const VoxelScene = dynamic(() => import("./voxel-scene").then((mod) => mod.VoxelScene), {
+  ssr: false,
+});
 
 const betaDownloadUrl =
   "https://github.com/swaritsawarkar/minemarker/releases/download/v4.3.0/MineMarker-Timeline-Viewer-4.3.0-Portable-x64.exe";
 
 const heroFacts = ["Manual markers", "Automatic events", "Timeline viewer"];
+
+const heroVisual = "/visuals/minemarker-cave-hero.png";
+const productVisual = "/visuals/minemarker-product-shot.png";
 
 const painItems = [
   {
@@ -27,7 +34,7 @@ const painItems = [
   },
   {
     icon: Search,
-    title: "Can’t remember",
+    title: "Can't remember",
     body: "Good moments get buried or forgotten.",
   },
   {
@@ -46,38 +53,38 @@ const steps = [
   {
     title: "Play normally",
     body: "Record your session like you always do.",
-    image: "left 62% top 53%",
+    image: heroVisual,
   },
   {
     title: "Mark moments",
     body: "Add markers or let MineMarker auto-detect events.",
-    image: "right 28% top 52%",
+    image: productVisual,
   },
   {
     title: "Load your session",
     body: "Open your export in the timeline viewer.",
-    image: "right 12% top 19%",
+    image: productVisual,
   },
   {
     title: "Jump to the good parts",
     body: "Edit faster with timestamps, notes, and suggestions.",
-    image: "right 4% top 24%",
+    image: heroVisual,
   },
 ];
 
-function ConceptCrop({
+function VisualImage({
   className,
-  position,
-  size = "1550px auto",
+  src,
+  position = "center",
 }: {
   className?: string;
-  position: string;
-  size?: string;
+  src: string;
+  position?: string;
 }) {
   return (
     <div
-      className={`bg-[url('/og-minemarker.png')] bg-no-repeat ${className ?? ""}`}
-      style={{ backgroundPosition: position, backgroundSize: size }}
+      className={`bg-cover bg-no-repeat ${className ?? ""}`}
+      style={{ backgroundImage: `url(${src})`, backgroundPosition: position }}
       aria-hidden="true"
     />
   );
@@ -128,10 +135,10 @@ function HeroProductWindow() {
 
         <div>
           <div className="relative h-[250px] overflow-hidden border border-white/10 bg-black sm:h-[340px]">
-            <ConceptCrop
+            <VisualImage
               className="absolute inset-0 opacity-95"
-              position="right 2% top 13%"
-              size="1160px auto"
+              src={productVisual}
+              position="center"
             />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_35%,transparent_0%,rgba(0,0,0,0.06)_50%,rgba(0,0,0,0.36)_100%)]" />
             <div className="absolute left-5 top-5 font-mono text-sm text-white">
@@ -168,7 +175,7 @@ function StoryboardPanel() {
             The problem
           </p>
           <h2 className="mt-4 max-w-xs text-3xl font-semibold tracking-[-0.04em] text-white">
-            Editing Minecraft videos shouldn’t feel like this.
+            Editing Minecraft videos shouldn&apos;t feel like this.
           </h2>
         </div>
         <div className="grid gap-px bg-white/10 md:grid-cols-4">
@@ -202,7 +209,7 @@ function StoryboardPanel() {
           {steps.map((step, index) => (
             <div key={step.title} className="overflow-hidden border border-white/12 bg-white/[0.035]">
               <div className="relative h-32 bg-black">
-                <ConceptCrop className="absolute inset-0" position={step.image} size="1250px auto" />
+                <VisualImage className="absolute inset-0" src={step.image} position="center" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#07100d] via-transparent to-transparent" />
                 <span className="absolute left-4 top-4 text-4xl font-black text-emerald-300">
                   {index + 1}
@@ -221,30 +228,26 @@ function StoryboardPanel() {
 }
 
 export function CinematicHero() {
-  const reducedMotion = useReducedMotion();
-
   return (
     <section id="top" className="relative isolate overflow-hidden bg-[#030706] pb-10">
       <SiteNav />
 
-      <ConceptCrop
+      <VisualImage
         className="absolute inset-y-0 right-0 top-0 w-[82%] opacity-95"
-        position="right top"
-        size="cover"
+        src={heroVisual}
+        position="center right"
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,#030706_0%,rgba(3,7,6,0.96)_25%,rgba(3,7,6,0.58)_58%,rgba(3,7,6,0.76)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_34%,rgba(88,255,190,0.18),transparent_35%),linear-gradient(180deg,rgba(3,7,6,0)_0%,#030706_94%)]" />
-      {!reducedMotion && (
-        <div className="absolute bottom-36 left-[42%] right-0 top-32 opacity-70">
-          <VoxelScene />
-        </div>
-      )}
+      <div className="absolute bottom-36 left-[42%] right-0 top-32 opacity-70 motion-reduce:hidden">
+        <VoxelScene />
+      </div>
 
       <div className="relative z-10 mx-auto grid min-h-[700px] w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pb-0 pt-28 sm:px-8 lg:grid-cols-[0.47fr_0.53fr] lg:pt-24">
         <div className="max-w-3xl">
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, y: 18 }}
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
             className="mb-7 inline-flex items-center gap-2 border border-emerald-300/35 bg-emerald-300/[0.08] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-emerald-100 shadow-[0_0_28px_rgba(51,255,141,0.11)]"
           >
@@ -253,18 +256,18 @@ export function CinematicHero() {
           </motion.div>
 
           <motion.h1
-            initial={reducedMotion ? false : { opacity: 0, y: 28 }}
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.08, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-[780px] text-balance text-[clamp(3.25rem,6.65vw,5.7rem)] font-black leading-[0.91] tracking-[-0.075em] text-white"
+            className="max-w-[780px] text-balance text-[clamp(2.35rem,9vw,3.1rem)] font-black leading-[0.98] tracking-[-0.06em] text-white sm:text-[clamp(3.25rem,6.65vw,5.7rem)] sm:leading-[0.91] sm:tracking-[-0.075em]"
           >
             Turn raw Minecraft gameplay into an{" "}
             <span className="text-emerald-300">organized</span> editing timeline.
           </motion.h1>
 
           <motion.p
-            initial={reducedMotion ? false : { opacity: 0, y: 22 }}
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             className="mt-7 max-w-xl text-lg leading-8 text-stone-300"
           >
@@ -274,8 +277,8 @@ export function CinematicHero() {
           </motion.p>
 
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.28, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 flex flex-col gap-3 sm:flex-row"
           >
@@ -303,8 +306,8 @@ export function CinematicHero() {
           </motion.div>
 
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0 }}
-            animate={reducedMotion ? undefined : { opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ delay: 0.42, duration: 0.8 }}
             className="mt-6 flex flex-wrap gap-5 text-sm text-stone-300"
           >

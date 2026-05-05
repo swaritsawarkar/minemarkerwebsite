@@ -15,13 +15,13 @@ export function SiteNav() {
         className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 sm:px-8"
         aria-label="Primary navigation"
       >
-        <a href="#top" className="group flex items-center gap-3">
+        <a href="#top" className="group flex min-w-0 items-center gap-3">
           <LogoMark className="size-9 transition-transform duration-300 group-hover:scale-105" />
-          <div>
-            <span className="block text-sm font-semibold uppercase tracking-[0.28em] text-white">
+          <div className="min-w-0">
+            <span className="block text-xs font-semibold uppercase tracking-[0.22em] text-white sm:text-sm sm:tracking-[0.28em]">
               MineMarker
             </span>
-            <span className="block text-[0.64rem] uppercase tracking-[0.24em] text-emerald-200/65">
+            <span className="hidden text-[0.64rem] uppercase tracking-[0.24em] text-emerald-200/65 sm:block">
               Creator editing assistant
             </span>
           </div>
@@ -45,9 +45,10 @@ export function SiteNav() {
           </span>
           <a
             href="#early-access"
-            className="group inline-flex items-center gap-2 bg-emerald-300 px-4 py-2.5 text-sm font-bold text-[#071008] shadow-[0_0_28px_rgba(64,255,150,0.18)] transition hover:bg-emerald-200"
+            className="group inline-flex shrink-0 items-center gap-2 bg-emerald-300 px-3 py-2.5 text-xs font-bold text-[#071008] shadow-[0_0_28px_rgba(64,255,150,0.18)] transition hover:bg-emerald-200 sm:px-4 sm:text-sm"
           >
-            Join the waitlist
+            <span className="sm:hidden">Join</span>
+            <span className="hidden sm:inline">Join the waitlist</span>
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
         </div>

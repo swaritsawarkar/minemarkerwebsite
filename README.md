@@ -11,6 +11,15 @@ Premium pre-release product website for MineMarker, a Minecraft creator editing 
 - Framer Motion
 - Supabase waitlist
 
+## Visual System
+
+The landing page uses clean generated product imagery in `public/visuals/`:
+
+- `minemarker-cave-hero.png` for the cinematic cave background
+- `minemarker-product-shot.png` for product and timeline preview imagery
+
+Readable product UI, buttons, labels, and website copy are rendered in code so the page does not rely on cropped screenshots or distorted embedded text.
+
 ## Local Development
 
 ```bash

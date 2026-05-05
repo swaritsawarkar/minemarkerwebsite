@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   BadgeCheck,
   CircleDot,
@@ -23,13 +23,14 @@ import { WaitlistForm } from "./waitlist-form";
 const betaDownloadUrl =
   "https://github.com/swaritsawarkar/minemarker/releases/download/v4.3.0/MineMarker-Timeline-Viewer-4.3.0-Portable-x64.exe";
 
-function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
-  const reducedMotion = useReducedMotion();
+const heroVisual = "/visuals/minemarker-cave-hero.png";
+const productVisual = "/visuals/minemarker-product-shot.png";
 
+function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <motion.div
-      initial={reducedMotion ? false : { opacity: 1, y: 34 }}
-      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={{ opacity: 1, y: 34 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className={className}
@@ -80,19 +81,19 @@ function SectionShell({
   );
 }
 
-function ConceptCrop({
+function VisualImage({
   className,
-  position,
-  size = "1250px auto",
+  src,
+  position = "center",
 }: {
   className?: string;
-  position: string;
-  size?: string;
+  src: string;
+  position?: string;
 }) {
   return (
     <div
-      className={`bg-[url('/og-minemarker.png')] bg-no-repeat ${className ?? ""}`}
-      style={{ backgroundPosition: position, backgroundSize: size }}
+      className={`bg-cover bg-no-repeat ${className ?? ""}`}
+      style={{ backgroundImage: `url(${src})`, backgroundPosition: position }}
       aria-hidden="true"
     />
   );
@@ -106,7 +107,7 @@ function InGameMockup() {
         <span>Fabric mod</span>
       </div>
       <div className="relative h-64 overflow-hidden border border-white/10 bg-[linear-gradient(135deg,#172018,#0c130f)]">
-        <ConceptCrop className="absolute inset-0 opacity-90" position="right 3% top 18%" />
+        <VisualImage className="absolute inset-0 opacity-90" src={heroVisual} position="center right" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,7,6,0.08),rgba(3,7,6,0.28)),radial-gradient(circle_at_45%_40%,transparent,rgba(3,7,6,0.55))]" />
         <div className="absolute bottom-5 left-5 right-5 border border-emerald-200/25 bg-black/55 p-4 backdrop-blur">
           <div className="font-mono text-sm text-emerald-200">
@@ -178,7 +179,7 @@ function TimelineMockup() {
         <div className="h-full w-[71%] bg-gradient-to-r from-emerald-300 via-cyan-200 to-amber-200" />
       </div>
       <div className="relative mb-4 h-40 overflow-hidden border border-white/10 bg-black">
-        <ConceptCrop className="absolute inset-0 opacity-95" position="right 5% top 12%" size="1200px auto" />
+        <VisualImage className="absolute inset-0 opacity-95" src={productVisual} position="center" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/25" />
       </div>
       <div className="space-y-3">
