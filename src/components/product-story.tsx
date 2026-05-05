@@ -13,8 +13,6 @@ import {
   Gem,
   HeartPulse,
   ListChecks,
-  Play,
-  Scissors,
   ShieldCheck,
   Skull,
   WandSparkles,
@@ -82,116 +80,21 @@ function SectionShell({
   );
 }
 
-function MessyVsClean() {
-  const messy = [
-    ["00:03:14", "mining"],
-    ["00:18:41", "?"],
-    ["00:42:02", "maybe diamonds"],
-    ["01:07:55", "death?"],
-    ["01:31:20", "boring cave"],
-  ];
-
-  const clean = [
-    ["00:07:42", "Diamond ore mined", "high"],
-    ["00:12:18", "Player died", "high"],
-    ["00:18:33", "Entered Nether", "high"],
-    ["00:24:51", "Low health", "medium"],
-    ["00:33:10", "Advancement", "medium"],
-  ];
-
+function ConceptCrop({
+  className,
+  position,
+  size = "1250px auto",
+}: {
+  className?: string;
+  position: string;
+  size?: string;
+}) {
   return (
-    <Reveal className="mt-16 grid gap-5 lg:grid-cols-2">
-      <div className="border border-red-200/10 bg-red-950/[0.08] p-6">
-        <div className="mb-7 flex items-center justify-between">
-          <h3 className="text-2xl font-semibold tracking-[-0.02em] text-white">
-            Raw footage guessing game
-          </h3>
-          <span className="text-xs uppercase tracking-[0.24em] text-red-200/70">Before</span>
-        </div>
-        <div className="space-y-3">
-          {messy.map(([time, label], index) => (
-            <div
-              key={time}
-              className="grid grid-cols-[5.5rem_1fr] items-center border border-white/10 bg-white/[0.025] px-4 py-3 text-sm text-stone-300"
-              style={{ opacity: 1 - index * 0.1 }}
-            >
-              <span className="font-mono text-red-100/70">{time}</span>
-              <span>{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="border border-emerald-200/20 bg-emerald-950/[0.08] p-6 shadow-[0_40px_100px_rgba(20,255,139,0.08)]">
-        <div className="mb-7 flex items-center justify-between">
-          <h3 className="text-2xl font-semibold tracking-[-0.02em] text-white">
-            Organized creator timeline
-          </h3>
-          <span className="text-xs uppercase tracking-[0.24em] text-emerald-200">After</span>
-        </div>
-        <div className="space-y-3">
-          {clean.map(([time, label, priority]) => (
-            <div
-              key={time}
-              className="grid grid-cols-[5.5rem_1fr_4.5rem] items-center border border-emerald-200/15 bg-emerald-200/[0.04] px-4 py-3 text-sm text-stone-200"
-            >
-              <span className="font-mono text-emerald-200">{time}</span>
-              <span>{label}</span>
-              <span className="text-right text-[0.65rem] uppercase tracking-[0.18em] text-amber-200">
-                {priority}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </Reveal>
-  );
-}
-
-const workflowSteps = [
-  {
-    icon: Play,
-    title: "Play normally",
-    body: "Start a MineMarker session alongside your recording. No cloud accounts, no editing software open.",
-  },
-  {
-    icon: Flag,
-    title: "Mark or auto-log moments",
-    body: "Use manual markers while the mod records useful game events like deaths, valuable blocks, low health, and dimensions.",
-  },
-  {
-    icon: Film,
-    title: "Load the session later",
-    body: "Open the local viewer, load the latest session JSON, then add your recorded video file.",
-  },
-  {
-    icon: Scissors,
-    title: "Jump to the good parts",
-    body: "Use timestamps, filters, notes, and suggestions to move faster through the edit.",
-  },
-];
-
-function Workflow() {
-  return (
-    <div className="mt-16 grid gap-4 lg:grid-cols-4">
-      {workflowSteps.map((step, index) => {
-        const Icon = step.icon;
-        return (
-          <Reveal key={step.title} className="relative border border-white/10 bg-white/[0.035] p-6">
-            <div className="mb-8 flex items-center justify-between">
-              <div className="grid size-12 place-items-center border border-emerald-200/25 bg-emerald-300/10 text-emerald-200">
-                <Icon className="size-5" />
-              </div>
-              <span className="font-mono text-xs uppercase tracking-[0.28em] text-stone-500">
-                0{index + 1}
-              </span>
-            </div>
-            <h3 className="text-xl font-semibold tracking-[-0.02em] text-white">{step.title}</h3>
-            <p className="mt-4 text-sm leading-7 text-stone-300">{step.body}</p>
-          </Reveal>
-        );
-      })}
-    </div>
+    <div
+      className={`bg-[url('/og-minemarker.png')] bg-no-repeat ${className ?? ""}`}
+      style={{ backgroundPosition: position, backgroundSize: size }}
+      aria-hidden="true"
+    />
   );
 }
 
@@ -203,15 +106,8 @@ function InGameMockup() {
         <span>Fabric mod</span>
       </div>
       <div className="relative h-64 overflow-hidden border border-white/10 bg-[linear-gradient(135deg,#172018,#0c130f)]">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:28px_28px]" />
-        <div className="absolute left-10 top-10 grid grid-cols-3 gap-1">
-          {Array.from({ length: 12 }).map((_, index) => (
-            <span
-              key={index}
-              className={`size-10 ${index % 4 === 0 ? "bg-cyan-200 shadow-[0_0_22px_rgba(103,232,249,0.42)]" : "bg-stone-700/70"}`}
-            />
-          ))}
-        </div>
+        <ConceptCrop className="absolute inset-0 opacity-90" position="right 3% top 18%" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,7,6,0.08),rgba(3,7,6,0.28)),radial-gradient(circle_at_45%_40%,transparent,rgba(3,7,6,0.55))]" />
         <div className="absolute bottom-5 left-5 right-5 border border-emerald-200/25 bg-black/55 p-4 backdrop-blur">
           <div className="font-mono text-sm text-emerald-200">
             /minemarker mark diamond_ore found diamonds near lava
@@ -280,6 +176,10 @@ function TimelineMockup() {
       </div>
       <div className="mb-5 h-2 overflow-hidden bg-white/10">
         <div className="h-full w-[71%] bg-gradient-to-r from-emerald-300 via-cyan-200 to-amber-200" />
+      </div>
+      <div className="relative mb-4 h-40 overflow-hidden border border-white/10 bg-black">
+        <ConceptCrop className="absolute inset-0 opacity-95" position="right 5% top 12%" size="1200px auto" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/25" />
       </div>
       <div className="space-y-3">
         {events.map(([time, label, Icon, priority]) => {
@@ -431,24 +331,6 @@ function FAQ() {
 export function ProductStory() {
   return (
     <>
-      <SectionShell className="bg-[#050806]">
-        <SectionIntro
-          eyebrow="The editing problem"
-          title="Minecraft knows what happened. Your video editor does not."
-          body="A normal editor only sees video and audio. MineMarker uses in-game context so creators do not have to scrub blindly through hours of raw gameplay."
-        />
-        <MessyVsClean />
-      </SectionShell>
-
-      <SectionShell id="how-it-works" className="bg-[#07100d]">
-        <SectionIntro
-          eyebrow="Workflow"
-          title="Four steps from raw session to editing map."
-          body="MineMarker stays out of the way while you play, then gives you structured timestamps when it is time to edit."
-        />
-        <Workflow />
-      </SectionShell>
-
       <SectionShell id="showcase" className="bg-[radial-gradient(circle_at_50%_0%,rgba(70,255,160,0.13),transparent_35%),#050806]">
         <SectionIntro
           eyebrow="Product preview"
@@ -458,7 +340,7 @@ export function ProductStory() {
         <Showcase />
       </SectionShell>
 
-      <SectionShell>
+      <SectionShell id="features">
         <SectionIntro
           eyebrow="Features"
           title="Not a replay mod. Not a generic marker script."
