@@ -4,6 +4,8 @@
 
 This repository is prepared for Vercel as a Next.js project.
 
+- Production URL: `https://minemarkerwebsite.vercel.app`
+- Vercel project: `swaritsawarkars-projects/minemarkerwebsite`
 - Build command: `npm run build`
 - Install command: `npm install`
 - Framework: Next.js
@@ -16,6 +18,8 @@ The site can build without Supabase variables, but the waitlist form will show a
 NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ```
+
+As of the first production deployment, no Vercel environment variables are set yet.
 
 ## Supabase
 
