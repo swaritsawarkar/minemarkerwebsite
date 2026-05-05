@@ -17,10 +17,10 @@ import {
   Scissors,
   ShieldCheck,
   Skull,
-  Sparkles,
   WandSparkles,
 } from "lucide-react";
 import type { ReactNode } from "react";
+import { WaitlistForm } from "./waitlist-form";
 
 const betaDownloadUrl =
   "https://github.com/swaritsawarkar/minemarker/releases/download/v4.3.0/MineMarker-Timeline-Viewer-4.3.0-Portable-x64.exe";
@@ -514,14 +514,8 @@ export function ProductStory() {
               current beta if you are comfortable testing early builds.
             </p>
           </Reveal>
-          <Reveal className="grid content-center gap-3">
-            <a
-              href="#waitlist-form"
-              className="inline-flex items-center justify-center gap-2 bg-emerald-300 px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-[#071008] transition hover:bg-emerald-200"
-            >
-              Join waitlist
-              <Sparkles className="size-4" />
-            </a>
+          <Reveal className="grid content-center gap-5">
+            <WaitlistForm />
             <a
               href={betaDownloadUrl}
               className="inline-flex items-center justify-center gap-2 border border-white/15 bg-white/[0.06] px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:border-emerald-200/55"
