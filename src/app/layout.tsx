@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/visuals/minemarker-product-shot.png",
+        url: "/visuals/timeline-viewer-product.png",
         width: 1536,
         height: 864,
         alt: "MineMarker cinematic product timeline preview",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "MineMarker - Minecraft Creator Timeline Assistant",
     description:
       "Turn raw Minecraft gameplay into an organized editing timeline.",
-    images: ["/visuals/minemarker-product-shot.png"],
+    images: ["/visuals/timeline-viewer-product.png"],
   },
 };
 

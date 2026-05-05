@@ -13,10 +13,16 @@ Premium pre-release product website for MineMarker, a Minecraft creator editing 
 
 ## Visual System
 
-The landing page uses clean generated product imagery in `public/visuals/`:
+The landing page uses a dedicated generated asset set in `public/visuals/`:
 
-- `minemarker-cave-hero.png` for the cinematic cave background
-- `minemarker-product-shot.png` for product and timeline preview imagery
+- `hero-cave-timeline.png` for the cinematic hero environment
+- `timeline-viewer-product.png` for the desktop timeline viewer product shot
+- `ingame-marker-scene.png` for the in-game marker moment
+- `export-data-flow.png` for JSON/TXT/CSV export storytelling
+- `clip-suggestions.png` for creator suggestion visuals
+- `session-summary.png` for edit-plan/session summary visuals
+- `problem-before-after.png` for raw footage versus organized timeline storytelling
+- `early-access-launch.png` for beta/waitlist launch sections
 
 Readable product UI, buttons, labels, and website copy are rendered in code so the page does not rely on cropped screenshots or distorted embedded text.
 

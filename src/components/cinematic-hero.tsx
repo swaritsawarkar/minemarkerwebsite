@@ -23,8 +23,12 @@ const betaDownloadUrl =
 
 const heroFacts = ["Manual markers", "Automatic events", "Timeline viewer"];
 
-const heroVisual = "/visuals/minemarker-cave-hero.png";
-const productVisual = "/visuals/minemarker-product-shot.png";
+const heroVisual = "/visuals/hero-cave-timeline.png";
+const productVisual = "/visuals/timeline-viewer-product.png";
+const problemVisual = "/visuals/problem-before-after.png";
+const ingameVisual = "/visuals/ingame-marker-scene.png";
+const exportVisual = "/visuals/export-data-flow.png";
+const suggestionsVisual = "/visuals/clip-suggestions.png";
 
 const painItems = [
   {
@@ -53,12 +57,12 @@ const steps = [
   {
     title: "Play normally",
     body: "Record your session like you always do.",
-    image: heroVisual,
+    image: ingameVisual,
   },
   {
     title: "Mark moments",
     body: "Add markers or let MineMarker auto-detect events.",
-    image: productVisual,
+    image: exportVisual,
   },
   {
     title: "Load your session",
@@ -68,7 +72,7 @@ const steps = [
   {
     title: "Jump to the good parts",
     body: "Edit faster with timestamps, notes, and suggestions.",
-    image: heroVisual,
+    image: suggestionsVisual,
   },
 ];
 
@@ -193,6 +197,27 @@ function StoryboardPanel() {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      <div className="border-b border-white/10 p-5">
+        <div className="relative min-h-[230px] overflow-hidden border border-white/12 bg-black md:min-h-[310px]">
+          <VisualImage className="absolute inset-0 opacity-95" src={problemVisual} position="center" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,7,6,0.3),rgba(3,7,6,0.02)_45%,rgba(3,7,6,0.3))]" />
+          <div className="absolute bottom-5 left-5 right-5 grid gap-3 md:grid-cols-3">
+            {[
+              ["Before", "Long footage, messy memory, lost moments."],
+              ["MineMarker", "Markers and events captured while you play."],
+              ["After", "A clean timeline for editing decisions."],
+            ].map(([label, body]) => (
+              <div key={label} className="border border-white/12 bg-black/55 p-4 backdrop-blur-md">
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.22em] text-emerald-200">
+                  {label}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-stone-200">{body}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

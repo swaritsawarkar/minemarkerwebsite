@@ -23,8 +23,13 @@ import { WaitlistForm } from "./waitlist-form";
 const betaDownloadUrl =
   "https://github.com/swaritsawarkar/minemarker/releases/download/v4.3.0/MineMarker-Timeline-Viewer-4.3.0-Portable-x64.exe";
 
-const heroVisual = "/visuals/minemarker-cave-hero.png";
-const productVisual = "/visuals/minemarker-product-shot.png";
+const ingameVisual = "/visuals/ingame-marker-scene.png";
+const exportVisual = "/visuals/export-data-flow.png";
+const timelineVisual = "/visuals/timeline-viewer-product.png";
+const suggestionsVisual = "/visuals/clip-suggestions.png";
+const sessionVisual = "/visuals/session-summary.png";
+const problemVisual = "/visuals/problem-before-after.png";
+const earlyAccessVisual = "/visuals/early-access-launch.png";
 
 function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
@@ -107,7 +112,7 @@ function InGameMockup() {
         <span>Fabric mod</span>
       </div>
       <div className="relative h-64 overflow-hidden border border-white/10 bg-[linear-gradient(135deg,#172018,#0c130f)]">
-        <VisualImage className="absolute inset-0 opacity-90" src={heroVisual} position="center right" />
+        <VisualImage className="absolute inset-0 opacity-90" src={ingameVisual} position="center right" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,7,6,0.08),rgba(3,7,6,0.28)),radial-gradient(circle_at_45%_40%,transparent,rgba(3,7,6,0.55))]" />
         <div className="absolute bottom-5 left-5 right-5 border border-emerald-200/25 bg-black/55 p-4 backdrop-blur">
           <div className="font-mono text-sm text-emerald-200">
@@ -138,7 +143,11 @@ function JsonMockup() {
         <span>Clean exports</span>
         <FileJson className="size-4 text-cyan-200" />
       </div>
-      <pre className="min-h-64 overflow-hidden border border-white/10 bg-black/40 p-5 text-sm leading-8 text-stone-300">
+      <div className="relative mb-4 h-36 overflow-hidden border border-white/10 bg-black">
+        <VisualImage className="absolute inset-0 opacity-90" src={exportVisual} position="center" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06100d] via-transparent to-transparent" />
+      </div>
+      <pre className="overflow-hidden border border-white/10 bg-black/40 p-5 text-sm leading-8 text-stone-300">
         {lines.map((line, index) => (
           <code
             key={line}
@@ -179,7 +188,7 @@ function TimelineMockup() {
         <div className="h-full w-[71%] bg-gradient-to-r from-emerald-300 via-cyan-200 to-amber-200" />
       </div>
       <div className="relative mb-4 h-40 overflow-hidden border border-white/10 bg-black">
-        <VisualImage className="absolute inset-0 opacity-95" src={productVisual} position="center" />
+        <VisualImage className="absolute inset-0 opacity-95" src={timelineVisual} position="center" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/25" />
       </div>
       <div className="space-y-3">
@@ -211,6 +220,10 @@ function SuggestionsMockup() {
         <span>Creator suggestions</span>
         <WandSparkles className="size-4 text-emerald-200" />
       </div>
+      <div className="relative mb-4 h-44 overflow-hidden border border-white/10 bg-black">
+        <VisualImage className="absolute inset-0 opacity-95" src={suggestionsVisual} position="center" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#07100d] via-transparent to-black/10" />
+      </div>
       <div className="space-y-3">
         {[
           ["Highlight moment", "Diamond find. Consider a zoom or sound cue."],
@@ -228,6 +241,33 @@ function SuggestionsMockup() {
   );
 }
 
+function SessionSummaryMockup() {
+  return (
+    <div className="min-h-[360px] border border-white/10 bg-[#07100d] p-5">
+      <div className="mb-4 flex items-center justify-between text-xs uppercase tracking-[0.2em] text-stone-400">
+        <span>Session summary</span>
+        <ListChecks className="size-4 text-emerald-200" />
+      </div>
+      <div className="relative h-64 overflow-hidden border border-white/10 bg-black">
+        <VisualImage className="absolute inset-0 opacity-95" src={sessionVisual} position="center" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#07100d] via-transparent to-black/10" />
+        <div className="absolute bottom-4 left-4 right-4 grid grid-cols-3 gap-2 text-center text-xs text-stone-200">
+          {[
+            ["24", "markers"],
+            ["57", "events"],
+            ["1.25s", "offset"],
+          ].map(([value, label]) => (
+            <div key={label} className="border border-white/10 bg-black/55 p-3 backdrop-blur">
+              <p className="font-mono text-lg text-emerald-200">{value}</p>
+              <p className="mt-1 uppercase tracking-[0.16em] text-stone-400">{label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Showcase() {
   return (
     <div className="mt-16 grid gap-5 lg:grid-cols-2">
@@ -235,6 +275,7 @@ function Showcase() {
       <JsonMockup />
       <TimelineMockup />
       <SuggestionsMockup />
+      <SessionSummaryMockup />
     </div>
   );
 }
@@ -365,19 +406,25 @@ export function ProductStory() {
               context so creators can decide faster.
             </p>
           </Reveal>
-          <Reveal className="grid gap-4">
+          <Reveal className="overflow-hidden border border-white/10 bg-black">
+            <div className="relative h-72">
+              <VisualImage className="absolute inset-0 opacity-95" src={problemVisual} position="center" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#07100d] via-black/10 to-transparent" />
+            </div>
+            <div className="grid gap-px bg-white/10 md:grid-cols-3">
             {[
               ["Normal editor", "Sees pixels, audio, and a long timeline."],
               ["MineMarker", "Sees markers, events, positions, labels, notes, and offset-adjusted times."],
               ["Creator result", "Less searching. More reviewing, cutting, and shaping the story."],
             ].map(([label, body]) => (
-              <div key={label} className="border border-white/10 bg-white/[0.035] p-6">
+              <div key={label} className="bg-[#07100d] p-6">
                 <span className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-200">
                   {label}
                 </span>
                 <p className="mt-3 text-lg leading-7 text-white">{body}</p>
               </div>
             ))}
+            </div>
           </Reveal>
         </div>
       </SectionShell>
@@ -396,6 +443,10 @@ export function ProductStory() {
               want a faster editing workflow. Join the waitlist for updates, or download the
               current beta if you are comfortable testing early builds.
             </p>
+            <div className="relative mt-8 min-h-[260px] overflow-hidden border border-emerald-200/15 bg-black">
+              <VisualImage className="absolute inset-0 opacity-95" src={earlyAccessVisual} position="center" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/10" />
+            </div>
           </Reveal>
           <Reveal className="grid content-center gap-5">
             <WaitlistForm />
@@ -423,7 +474,13 @@ export function ProductStory() {
         <FAQ />
       </SectionShell>
 
-      <SectionShell className="bg-[radial-gradient(circle_at_50%_30%,rgba(82,255,170,0.16),transparent_30%),#050806]">
+      <SectionShell className="overflow-hidden bg-[#050806]">
+        <VisualImage
+          className="absolute inset-0 opacity-30"
+          src={earlyAccessVisual}
+          position="center"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(82,255,170,0.18),transparent_30%),linear-gradient(180deg,rgba(5,8,6,0.7),#050806_82%)]" />
         <Reveal className="mx-auto max-w-4xl text-center">
           <BadgeCheck className="mx-auto mb-7 size-9 text-emerald-200" />
           <h2 className="text-balance text-5xl font-semibold tracking-[-0.055em] text-white sm:text-6xl">
