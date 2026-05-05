@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://minemarkerwebsite.vercel.app"),
   title: "MineMarker - Minecraft Creator Timeline Assistant",
   description:
     "MineMarker is a pre-release Minecraft creator tool that turns long gameplay recordings into organized editing timelines with manual markers, automatic events, and exportable editing notes.",
@@ -21,6 +22,21 @@ export const metadata: Metadata = {
     description:
       "Turn raw Minecraft gameplay into an organized editing timeline.",
     type: "website",
+    images: [
+      {
+        url: "/og-minemarker.png",
+        width: 1792,
+        height: 1024,
+        alt: "MineMarker cinematic product website preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MineMarker - Minecraft Creator Timeline Assistant",
+    description:
+      "Turn raw Minecraft gameplay into an organized editing timeline.",
+    images: ["/og-minemarker.png"],
   },
 };
 

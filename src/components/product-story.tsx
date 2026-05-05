@@ -30,7 +30,7 @@ function Reveal({ children, className = "" }: { children: ReactNode; className?:
 
   return (
     <motion.div
-      initial={reducedMotion ? false : { opacity: 0, y: 34 }}
+      initial={reducedMotion ? false : { opacity: 1, y: 34 }}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
